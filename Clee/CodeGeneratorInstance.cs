@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Clee.CleeWildcards;
 using Clee.Text;
 
@@ -33,11 +34,13 @@ public class CodeGeneratorInstance
     public string Transpile(string path, string cleeCode)
     {
         var logText = $"- Transpiling. {DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss:fffffff")}";
-        InvokeLogEvent($"{new string('-', logText.Length)}\r\n{logText}\r\n{new string('-', logText.Length)}");
+        var stopwatch = Stopwatch.StartNew();
+        InvokeLogEvent($"{new string('-', logText.Length)}\r\n{logText}");
 
         LastestFilePath = path;
         cleeCode = cleeCode.Replace("\r\n", "ͳ").Replace("\n", "\r\n").Replace("ͳ", "\r\n");
         var stringManager = _wildcardManager.ApplyWildcards(this, new StringManager(cleeCode));
+        InvokeLogEvent($"- Transpile end within {stopwatch.Elapsed.TotalMilliseconds}ms.\r\n{new string('-', logText.Length)}");
         return stringManager.Text.Trim();
     }
     
