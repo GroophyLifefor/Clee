@@ -113,7 +113,7 @@ fn main()
 
         private void Compile()
         {
-            Result.Text = _codeGenerator.Transpile(@"C:\Users\Groop\Masaüstü\", Editor.Text);
+            Result.Text = _codeGenerator.Transpile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), Editor.Text);
         }
     }
 }
