@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clee", "Clee\Clee.csproj", "{C8CEFD0F-82C8-4B73-9069-5EAA0D7E1F36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleeDesk", "CleeDesk\CleeDesk.csproj", "{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8CEFD0F-82C8-4B73-9069-5EAA0D7E1F36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8CEFD0F-82C8-4B73-9069-5EAA0D7E1F36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8CEFD0F-82C8-4B73-9069-5EAA0D7E1F36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8CEFD0F-82C8-4B73-9069-5EAA0D7E1F36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
