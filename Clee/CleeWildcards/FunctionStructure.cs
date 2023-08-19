@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Clee.Text;
+using Dumpify;
 
 namespace Clee.CleeWildcards;
 
@@ -57,24 +59,40 @@ public class FunctionStructure : BaseWildcard
     private static string AddIfNotStartWith(string value, string c)
         => value.StartsWith(c) ? value : c + value;
 
-    private static string[] ParseArgs(string value)
-        => value
-            .Split(',')                             // split by ','
-            .Select(x => x.Trim())                  // remove space characters
-            .Where(x => !string.IsNullOrEmpty(x))   // don't get empty args
-            .ToArray();
+    private List<Parameter> ParseArgs(string value)
+    {
+        return value.Split(',').Where(x => !string.IsNullOrEmpty(x.Trim())).Select(x =>
+        {
+            var doublePointIndex = x.IndexOf(':');
+            return doublePointIndex != -1 ? new Parameter()
+            {
+                DisplayName = x.Substring(0, doublePointIndex).Trim(),
+                DefineName = x.Substring(doublePointIndex + 1).Trim()
+            } : new Parameter()
+            {
+                DisplayName = x.Trim(),
+                DefineName = x.Trim()
+            };
+        }).ToList();
+    }
 
-    private static string GenerateLabelParameters(string[] args)
-        => args.Length == 0 
+    private static string GenerateLabelParameters(List<Parameter> args)
+        => args.Count == 0 
             ? "" 
             : string.Join(
                     string.Empty, 
-                    args.Select(x => $"<{x}> ")
+                    args.Select(x => $"<{x.DisplayName}> ")
                     ).Trim();
 
-    private static string GenerateDefineParameters(string[] args, int i = 1)
+    private static string GenerateDefineParameters(List<Parameter> args, int i = 1)
         => string.Join(
             string.Empty, 
-            args.Select(x => $"set {x}=%~{i++}\r\n")
+            args.Select(x => $"set {x.DefineName}=%~{i++}\r\n")
             );
+}
+
+internal class Parameter
+{
+    public string DisplayName { get; set; }
+    public string DefineName { get; set; }
 }

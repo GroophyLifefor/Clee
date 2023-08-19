@@ -31,7 +31,7 @@ namespace CleeDesk
 
             Editor.Text = """
 @echo off
-./import(test, "test.clee")
+./import(sleep, "system.clee")
 
 fn main()
 {-
