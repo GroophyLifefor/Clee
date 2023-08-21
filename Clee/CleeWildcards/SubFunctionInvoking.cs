@@ -20,6 +20,6 @@ public class SubFunctionInvoking : BaseWildcard
         string functionName = modifyWildcard.GetValue("functionName").Trim();
         string[] args = modifyWildcard.GetValue("args").Split(',').Select(x => x.Trim()).ToArray();
 
-        modifyWildcard.Replace($"CALL :{functionName} \"%{variableName}%\" {string.Join(" ", args)}");
+        modifyWildcard.Replace($"CALL :{functionName} \"{variableName}\" \"%{variableName}%\" {string.Join(" ", args)}");
     }
 }
