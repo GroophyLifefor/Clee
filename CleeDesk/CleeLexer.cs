@@ -11,14 +11,16 @@ namespace CleeDesk
             StyleInvoking = 2,
             StyleFN = 3,
             StyleFunctionName = 4,
-            StyleString = 5;
+            StyleString = 5,
+            StyleComment = 6;
 
         private const int
             STATE_UNKNOWN = 0,
             STATE_VARIABLE = 1,
             STATE_INVOKING = 2,
             STATE_FUNCTION = 3,
-            STATE_STRING = 4;
+            STATE_STRING = 4,
+            STATE_COMMENT = 5;
 
         private string keywords;
 
@@ -80,9 +82,39 @@ namespace CleeDesk
                                 index++;
                                 state = STATE_STRING;
                             }
+                            else if ((_1 == 'R' || _1 == 'r') && (_2 == 'E' || _2 == 'e') && (_3 == 'M' || _3 == 'm'))
+                            {
+                                Highlight(3, StyleComment);
+                                index += 3;
+                                length = 0;
+                                state = STATE_COMMENT;
+                            }
+                            else if (_1 == ':' && _2 == ':')
+                            {
+                                Highlight(2, StyleComment);
+                                index += 2;
+                                length = 0;
+                                state = STATE_COMMENT;
+                            }
                             else
                             {
                                 Highlight(1, StyleDefault);
+                                index++;
+                            }
+                            break;
+                        case STATE_COMMENT:
+                            if (_1 == '\n')
+                            {
+                                length++;
+                                Highlight(length, StyleComment);
+                                length = 0;
+                                index++;
+
+                                state = STATE_UNKNOWN;
+                            }
+                            else
+                            {
+                                length++;
                                 index++;
                             }
                             break;

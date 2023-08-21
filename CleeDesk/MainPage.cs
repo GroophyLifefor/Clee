@@ -71,6 +71,7 @@ fn main()
             Editor.Styles[CleeLexer.StyleFN].ForeColor = Color.FromArgb(242, 109, 157);
             Editor.Styles[CleeLexer.StyleFunctionName].ForeColor = Color.FromArgb(139, 233, 253);
             Editor.Styles[CleeLexer.StyleString].ForeColor = Color.FromArgb(230, 204, 100);
+            Editor.Styles[CleeLexer.StyleComment].ForeColor = Color.Gray;
 
             Result.Lexer = Lexer.Batch;
             Result.Styles[Style.Batch.Default].ForeColor = Color.White;
