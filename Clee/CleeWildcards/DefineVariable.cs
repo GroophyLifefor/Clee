@@ -18,9 +18,14 @@ public class DefineVariable : BaseWildcard
     {
         var name = modifyWildcard.GetValue("name").Trim();
         var value = modifyWildcard.GetValue("value").Trim();
-        
+        var isArithmetic = IsArithmetic(modifyWildcard.Text);
+
         __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
 
-        modifyWildcard.Replace($"SET {name}={value}\r\n");
+        modifyWildcard.Replace($"SET {(isArithmetic ? "/A" : "")} {name}={value}\r\n");
     }
+
+    static string[] ArithmeticKeys = new[] { "*", "/", "%", "+", "-", "<<", ">>", "^", "*=", "/=", "%=", "+=", "-=", "&=", "^=", "|=", "<<=", ">>=" };
+    private static bool IsArithmetic(string value)
+        => ArithmeticKeys.Any(key => value.Contains(key));
 }
