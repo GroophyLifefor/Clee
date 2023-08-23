@@ -260,9 +260,9 @@ public class StringManager : IDisposable
                 var _next = wildcards.Length > wildcardIndex + 1 ? wildcards[wildcardIndex + 1] : null;
 
                 int newIndex = _next is null
-                    ? GetAfter(_currentIndex).Length
+                    ? (GetAfter(_currentIndex) ?? "").Length
                     : _next.Value is null
-                        ? GetAfter(_currentIndex).Length
+                        ? (GetAfter(_currentIndex) ?? "").Length
                         : GetAfterText().IndexOf(_next.Value,
                             caseSensitive ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
 
