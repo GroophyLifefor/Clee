@@ -21,6 +21,7 @@ public class SubFunctionInvoking : BaseWildcard
         string[] args = modifyWildcard.GetValue("args").Split(',').Select(x => x.Trim()).ToArray();
 
         __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
+
         modifyWildcard.Replace($"CALL :{functionName} \"{variableName}\" \"%{variableName}%\" {string.Join(" ", args)}");
     }
 }
