@@ -9,7 +9,7 @@ public class StringManager : IDisposable
 {
     private bool _disposed;
     private string _text;
-    private int _currentIndex = 0;
+    internal int _currentIndex = 0;
 
     public string Text => _text;
     public int MaxLength => _text.Length;

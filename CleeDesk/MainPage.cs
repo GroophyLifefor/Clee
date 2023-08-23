@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using Clee;
 using ScintillaNET;
@@ -27,17 +30,27 @@ namespace CleeDesk
             Editor.TextChanged += (sender, e) => debouncedCompiler();
             Editor.TextChanged += (sender, e) => SetLineNumbers((Scintilla)sender, ref editorMaxLineNumberCharLength);
             Result.TextChanged += (sender, e) => SetLineNumbers((Scintilla)sender, ref resultMaxLineNumberCharLength);
+            Editor.KeyDown += OnKeyDown;
             
 
             Editor.Text = """
 @echo off
-./import(sleep, "system.clee")
 
 fn main()
 {-
-    echo hi
+    echo hello world
 -}
 """.Trim();
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                Compile();
+                File.WriteAllText(Path.Combine(Path.GetTempPath(), "test.bat"), Result.Text);
+                Process.Start(Path.Combine(Path.GetTempPath(), "test.bat"));
+            }
         }
 
         private void InitalizeCleeLexer()
@@ -113,6 +126,7 @@ fn main()
 
         private void Compile()
         {
+            Logs.Text = string.Empty;
             Result.Text = _codeGenerator.Transpile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), Editor.Text);
         }
     }

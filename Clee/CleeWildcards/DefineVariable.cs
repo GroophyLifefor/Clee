@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Clee.Text;
 
 namespace Clee.CleeWildcards;
@@ -18,6 +19,8 @@ public class DefineVariable : BaseWildcard
         var name = modifyWildcard.GetValue("name").Trim();
         var value = modifyWildcard.GetValue("value").Trim();
         
+        __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
+
         modifyWildcard.Replace($"SET {name}={value}\r\n");
     }
 }

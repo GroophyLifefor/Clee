@@ -20,6 +20,8 @@ public class InvokingFunction : BaseWildcard
         string functionName = modifyWildcard.GetValue("functionName");
         string[] args = modifyWildcard.GetValue("args").Split(',').Select(x => x.Trim()).ToArray();
         
+        __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
+
         modifyWildcard.Replace($"CALL :{functionName} {string.Join(" ", args)}");
     }
 }

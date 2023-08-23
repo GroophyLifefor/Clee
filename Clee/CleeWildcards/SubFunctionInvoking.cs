@@ -6,7 +6,7 @@ namespace Clee.CleeWildcards;
 
 public class SubFunctionInvoking : BaseWildcard
 {
-    public override string WildcardString { get; } = "./[name].[functionName]([args])*;";
+    public override string WildcardString { get; } = "./[name].[functionName]([args]);";
     public override bool CaseSensitive { get; } = false;
     public override __External __External { get; set; }
     
@@ -20,6 +20,7 @@ public class SubFunctionInvoking : BaseWildcard
         string functionName = modifyWildcard.GetValue("functionName").Trim();
         string[] args = modifyWildcard.GetValue("args").Split(',').Select(x => x.Trim()).ToArray();
 
-        modifyWildcard.Replace($"CALL :{functionName} \"%{variableName}%\" {string.Join(" ", args)}");
+        __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
+        modifyWildcard.Replace($"CALL :{functionName} \"{variableName}\" \"%{variableName}%\" {string.Join(" ", args)}");
     }
 }

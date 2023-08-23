@@ -92,4 +92,14 @@ public class ModifyWildcard
     /// <param name="text">The text to replace the content with.</param>
     public void Replace(string text)
         => _stringManager.Replace(StartIndex, EndIndex - StartIndex, text);
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="increaseValue"></param>
+    public void RevertWithIncreaseIndex(int increaseValue = 0)
+    {
+        _stringManager._currentIndex -= EndIndex - StartIndex;
+        _stringManager._currentIndex += increaseValue;
+    }
 }

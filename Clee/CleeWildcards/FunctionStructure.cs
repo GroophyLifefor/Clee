@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Clee.Text;
-using Dumpify;
 
 namespace Clee.CleeWildcards;
 
@@ -27,14 +26,18 @@ public class FunctionStructure : BaseWildcard
             modifyWildcard.Replace(string.Empty);
             return;
         }
+        
+        __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
 
         var labelParameters = GenerateLabelParameters(args);
         var defineParameters = GenerateDefineParameters(args);
+        var disposeParameters = GenerateDisposeParameters(args);
         
         modifyWildcard.Replace(
             $":{name} {AddIfNotEndWith(labelParameters, Environment.NewLine)}" +
             $"{defineParameters}" +
             $"{AddIfNotStartWith(AddIfNotEndWith(functionCode, Environment.NewLine), Environment.NewLine)}" +
+            $"{disposeParameters}" +
             $"GOTO :EOF" +
             $"{Environment.NewLine}" +
             $"{Environment.NewLine}");
@@ -88,6 +91,12 @@ public class FunctionStructure : BaseWildcard
         => string.Join(
             string.Empty, 
             args.Select(x => $"set {x.DefineName}=%~{i++}\r\n")
+            );
+    
+    private string GenerateDisposeParameters(List<Parameter> args)
+        => string.Join(
+            string.Empty, 
+            args.Select(x => $"set {x.DefineName}=\r\n")
             );
 }
 

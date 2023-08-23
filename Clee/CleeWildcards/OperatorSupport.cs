@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Clee.Text;
 
 namespace Clee.CleeWildcards;
@@ -17,6 +18,8 @@ public class OperatorSupport : BaseWildcard
     {
         var @operator = modifyWildcard.GetWildcard("operator");
         var modified = EvalOperator(@operator!.Value);
+        
+        __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
 
         modifyWildcard.SetValue("operator", modified);
     }

@@ -28,7 +28,9 @@ public class ImportModule : BaseWildcard
                 Path.GetDirectoryName(path), 
                 File.ReadAllText(path).Replace("#Clee:Library", $"REM Clee:Library:{Path.GetFileName(path)}"),
                 allowedFuncs);
-        
+            
+            __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
+
             modifyWildcard.Replace(string.Empty);
             stringManager.Replace(stringManager.MaxLength, 0, code);
         }
