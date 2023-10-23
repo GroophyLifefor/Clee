@@ -114,9 +114,14 @@ public class StringManager : IDisposable
         StringBuilder tempName = new StringBuilder();
         for (int i = 0; i < pattern.Length; i++)
         {
-            char _c = pattern[i];
+            char _c = i != 0 ? pattern[i - 1] : ' ';
+            char c = pattern[i];
 
-            if (_c == '*')
+            if (c == '*' && _c == '\\')
+            {
+                tempName.Remove(tempName.Length - 1, 1);
+            }
+            else if (c == '*')
             {
                 if (tempName.Length != 0)
                 {
@@ -138,7 +143,7 @@ public class StringManager : IDisposable
                 continue;
             }
 
-            if (_c == '[' && !isNamed)
+            if (c == '[' && !isNamed)
             {
                 isNamed = true;
                 if (tempName.Length != 0)
@@ -155,7 +160,7 @@ public class StringManager : IDisposable
                 continue;
             }
 
-            if (_c == ']' && isNamed)
+            if (c == ']' && isNamed)
             {
                 isNamed = false;
                 patternList.Add(new ()
@@ -168,7 +173,7 @@ public class StringManager : IDisposable
                 continue;
             }
 
-            tempName.Append(_c);
+            tempName.Append(c);
         }
 
         if (tempName.Length != 0)

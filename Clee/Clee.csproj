@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CleeWildcards\BaseWildcard.cs" />
+    <Compile Include="CleeWildcards\Comments\MultipleLineComment.cs" />
+    <Compile Include="CleeWildcards\Comments\SingleLineComment.cs" />
     <Compile Include="CleeWildcards\DefineVariable.cs" />
     <Compile Include="CleeWildcards\FunctionStructure.cs" />
     <Compile Include="CleeWildcards\ImportModule.cs" />

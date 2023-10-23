@@ -36,9 +36,24 @@ namespace CleeDesk
             Editor.Text = """
 @echo off
 
+/*********************************************************************
+
+**      Clee Example
+
+*********************************************************************/
 fn main()
 {-
-    echo hello world
+    // Call print with "Hello world!" parameter
+
+    ./print("Hello world!")
+        /** "Hello world!" was a parameter **/
+
+    /** This prints hi **/ echo hi
+-}
+
+fn print(var)
+{-
+    echo %var%
 -}
 """.Trim();
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using Clee.CleeWildcards;
+using Clee.CleeWildcards.Comments;
 using Clee.Text;
 
 namespace Clee;
@@ -15,18 +16,21 @@ public class CodeGeneratorInstance
 
     public CodeGeneratorInstance()
     {
-        _wildcardManager = new WildcardManager();
+        _wildcardManager = new WildcardManager(); // -1 :D
         
         _wildcardManager.addWildcard("functionStructure", new FunctionStructure(), 0);
         
-        _wildcardManager.addWildcard("ImportModule", new ImportModule(), 1);
-        _wildcardManager.addWildcard("SetWithInvoking", new SetWithInvoking(), 1);
-        _wildcardManager.addWildcard("SubFunctionInvoking", new SubFunctionInvoking(), 1);
-
-        _wildcardManager.addWildcard("invokingFunction", new InvokingFunction(), 2);
+        _wildcardManager.addWildcard("MultipleLineComment", new MultipleLineComment(), 1);
+        _wildcardManager.addWildcard("SingleLineComment", new SingleLineComment(), 1);
         
-        _wildcardManager.addWildcard("defineVariable", new DefineVariable(), 3);
-        _wildcardManager.addWildcard("OperatorSupport", new OperatorSupport(), 3);
+        _wildcardManager.addWildcard("ImportModule", new ImportModule(), 2);
+        _wildcardManager.addWildcard("SetWithInvoking", new SetWithInvoking(), 2);
+        _wildcardManager.addWildcard("SubFunctionInvoking", new SubFunctionInvoking(), 2);
+
+        _wildcardManager.addWildcard("invokingFunction", new InvokingFunction(), 3);
+        
+        _wildcardManager.addWildcard("defineVariable", new DefineVariable(), 4);
+        _wildcardManager.addWildcard("OperatorSupport", new OperatorSupport(), 4);
     }
     
     internal void InvokeLogEvent(string log)
