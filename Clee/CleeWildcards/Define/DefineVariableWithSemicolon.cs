@@ -4,7 +4,7 @@ using Clee.Text;
 
 namespace Clee.CleeWildcards;
 
-public class DefineVariable : BaseWildcard
+public class DefineVariableWithSemicolon : BaseWildcard
 {
     public override string WildcardString { get; } = ";[name]=[value]\r\n";
     public override bool CaseSensitive { get; } = false;

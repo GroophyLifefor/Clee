@@ -2,6 +2,7 @@
 using System;
 using Clee.CleeWildcards;
 using Clee.CleeWildcards.Comments;
+using Clee.CleeWildcards.Define;
 using Clee.Text;
 
 namespace Clee;
@@ -24,15 +25,18 @@ public class CodeGeneratorInstance
 
         _wildcardManager.AddWildcard("MultipleLineComment", new MultipleLineComment(), 2);
         _wildcardManager.AddWildcard("SingleLineComment", new SingleLineComment(), 2);
-        
+        _wildcardManager.AddWildcard("DefineWithInvoking", new DefineWithInvoking(), 2);
+
         _wildcardManager.AddWildcard("ImportModule", new ImportModule(), 3);
-        _wildcardManager.AddWildcard("SetWithInvoking", new SetWithInvoking(), 3);
+        _wildcardManager.AddWildcard("DefineWithInvokingWithSemicolon", new DefineWithInvokingWithSemicolon(), 3);
         _wildcardManager.AddWildcard("SubFunctionInvoking", new SubFunctionInvoking(), 3);
 
         _wildcardManager.AddWildcard("invokingFunction", new InvokingFunction(), 4);
         
         _wildcardManager.AddWildcard("defineVariable", new DefineVariable(), 5);
-        _wildcardManager.AddWildcard("OperatorSupport", new OperatorSupport(), 5);
+        
+        _wildcardManager.AddWildcard("DefineVariableWithSemiColon", new DefineVariableWithSemicolon(), 6);
+        _wildcardManager.AddWildcard("OperatorSupport", new OperatorSupport(), 6);
     }
     
     internal void InvokeLogEvent(string log)

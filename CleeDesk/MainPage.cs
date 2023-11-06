@@ -55,12 +55,7 @@ namespace CleeDesk
 *********************************************************************/
 fn main()
 {-
-    // Call print with "Hello world!" parameter
-
     ./print("Hello world!")
-        /** "Hello world!" was a parameter **/
-
-    /** This prints hi **/ echo hi
 -}
 
 fn print(var)

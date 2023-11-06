@@ -57,13 +57,15 @@
     <Compile Include="CleeWildcards\Comments\MultipleLineComment.cs" />
     <Compile Include="CleeWildcards\Comments\SingleLineComment.cs" />
     <Compile Include="CleeWildcards\Debugger.cs" />
-    <Compile Include="CleeWildcards\DefineVariable.cs" />
+    <Compile Include="CleeWildcards\Define\DefineVariableWithSemicolon.cs" />
+    <Compile Include="CleeWildcards\Define\DefineVariable.cs" />
+    <Compile Include="CleeWildcards\Define\DefineWithInvoking.cs" />
+    <Compile Include="CleeWildcards\Define\DefineWithInvokingWithSemicolon.cs" />
     <Compile Include="CleeWildcards\FunctionStructure.cs" />
     <Compile Include="CleeWildcards\ImportModule.cs" />
     <Compile Include="CleeWildcards\Initializer.cs" />
     <Compile Include="CleeWildcards\InvokingFunction.cs" />
     <Compile Include="CleeWildcards\OperatorSupport.cs" />
-    <Compile Include="CleeWildcards\SetWithInvoking.cs" />
     <Compile Include="CleeWildcards\SubFunctionInvoking.cs" />
     <Compile Include="CleeWildcards\__external.cs" />
     <Compile Include="CodeGeneratorInstance.cs" />
