@@ -32,7 +32,7 @@ public class ImportModule : BaseWildcard
             __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
 
             modifyWildcard.Replace(string.Empty);
-            stringManager.Replace(stringManager.MaxLength, 0, code);
+            stringManager.Replace(stringManager.MaxLength, 0, code + "\r\n");
         }
         else
         {
@@ -43,9 +43,16 @@ public class ImportModule : BaseWildcard
 
     private bool TryGetFilePath(string path, out string match)
     {
+        path = path.Replace('/', '\\');
         var baseFilePath = AddExtensionIfNeeded(Path.Combine(__External.LastestFilePath, path), ".clee");
         var assemblyPath = Path.GetDirectoryName(baseFilePath);
         var assemblyCase = Path.Combine(assemblyPath, path);
+        
+        if (File.Exists(baseFilePath))
+        {
+            match = baseFilePath;
+            return true;
+        }
         
         if (File.Exists(assemblyCase))
         {

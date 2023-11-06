@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using Clee;
 using ScintillaNET;
@@ -15,8 +14,17 @@ namespace CleeDesk
         private int resultMaxLineNumberCharLength;
         private CodeGeneratorInstance _codeGenerator;
 
-        public MainPage()
+        private bool _isUntitled = true;
+        private string _path = string.Empty;
+
+        public MainPage(string path)
         {
+            if (!string.IsNullOrEmpty(path))
+            {
+                _isUntitled = false;
+                _path = path;
+            }
+            
             InitializeComponent();
             InitalizeCleeLexer();
             MainPage_SizeChanged(null, null);
@@ -27,13 +35,17 @@ namespace CleeDesk
             _codeGenerator = new CodeGeneratorInstance();
             _codeGenerator.OnLog += log => Logs.Text += $"{log}\r\n";
             var debouncedCompiler = new Action(Compile).Debounce();
-            Editor.TextChanged += (sender, e) => debouncedCompiler();
+            Editor.TextChanged += (sender, e) =>
+            {
+                SaveThis();
+                debouncedCompiler();
+            };
             Editor.TextChanged += (sender, e) => SetLineNumbers((Scintilla)sender, ref editorMaxLineNumberCharLength);
             Result.TextChanged += (sender, e) => SetLineNumbers((Scintilla)sender, ref resultMaxLineNumberCharLength);
             Editor.KeyDown += OnKeyDown;
             
 
-            Editor.Text = """
+            Editor.Text = _isUntitled ? """
 @echo off
 
 /*********************************************************************
@@ -55,7 +67,15 @@ fn print(var)
 {-
     echo %var%
 -}
-""".Trim();
+""".Trim() : File.ReadAllText(_path);
+        }
+
+        private void SaveThis()
+        {
+            if (!_isUntitled)
+            {
+                File.WriteAllText(_path, Editor.Text);
+            }
         }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
@@ -91,8 +111,8 @@ fn print(var)
             Result.StyleClearAll();
             Result.Styles[Style.LineNumber].ForeColor = Color.FromArgb(144, 145, 148);
             Result.Styles[Style.LineNumber].BackColor = Color.FromArgb(40, 42, 54);
-
             
+
             Editor.Styles[CleeLexer.StyleDefault].ForeColor = Color.White;
             Editor.Styles[CleeLexer.StyleVariable].ForeColor = Color.FromArgb(255, 184, 108);
             Editor.Styles[CleeLexer.StyleInvoking].ForeColor = Color.FromArgb(139, 233, 253);
@@ -143,7 +163,7 @@ fn print(var)
         private void Compile()
         {
             Logs.Text = string.Empty;
-            Result.Text = _codeGenerator.Transpile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), Editor.Text);
+            Result.Text = _codeGenerator.Transpile(_isUntitled ? Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) : new FileInfo(_path).Directory.FullName, Editor.Text);
         }
     }
 }

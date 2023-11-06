@@ -1,6 +1,5 @@
 ﻿#nullable enable
 using System;
-using System.Diagnostics;
 using Clee.CleeWildcards;
 using Clee.CleeWildcards.Comments;
 using Clee.Text;
@@ -18,19 +17,22 @@ public class CodeGeneratorInstance
     {
         _wildcardManager = new WildcardManager(); // -1 :D
         
-        _wildcardManager.addWildcard("functionStructure", new FunctionStructure(), 0);
+        _wildcardManager.AddWildcard("functionStructure", new FunctionStructure(), 0);
         
-        _wildcardManager.addWildcard("MultipleLineComment", new MultipleLineComment(), 1);
-        _wildcardManager.addWildcard("SingleLineComment", new SingleLineComment(), 1);
-        
-        _wildcardManager.addWildcard("ImportModule", new ImportModule(), 2);
-        _wildcardManager.addWildcard("SetWithInvoking", new SetWithInvoking(), 2);
-        _wildcardManager.addWildcard("SubFunctionInvoking", new SubFunctionInvoking(), 2);
+        _wildcardManager.AddWildcard("Initializer", new Initializer(), 1);
+        _wildcardManager.AddWildcard("Debugger", new Debugger(), 1);
 
-        _wildcardManager.addWildcard("invokingFunction", new InvokingFunction(), 3);
+        _wildcardManager.AddWildcard("MultipleLineComment", new MultipleLineComment(), 2);
+        _wildcardManager.AddWildcard("SingleLineComment", new SingleLineComment(), 2);
         
-        _wildcardManager.addWildcard("defineVariable", new DefineVariable(), 4);
-        _wildcardManager.addWildcard("OperatorSupport", new OperatorSupport(), 4);
+        _wildcardManager.AddWildcard("ImportModule", new ImportModule(), 3);
+        _wildcardManager.AddWildcard("SetWithInvoking", new SetWithInvoking(), 3);
+        _wildcardManager.AddWildcard("SubFunctionInvoking", new SubFunctionInvoking(), 3);
+
+        _wildcardManager.AddWildcard("invokingFunction", new InvokingFunction(), 4);
+        
+        _wildcardManager.AddWildcard("defineVariable", new DefineVariable(), 5);
+        _wildcardManager.AddWildcard("OperatorSupport", new OperatorSupport(), 5);
     }
     
     internal void InvokeLogEvent(string log)
@@ -39,7 +41,7 @@ public class CodeGeneratorInstance
     public string Transpile(string path, string cleeCode)
     {
         var logText = $"- Transpiling. {DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss:fffffff")}";
-        var stopwatch = Stopwatch.StartNew();
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
         InvokeLogEvent($"{new string('-', logText.Length)}\r\n{logText}");
 
         LastestFilePath = path;
