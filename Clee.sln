@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clee", "Clee\Clee.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleeDesk", "CleeDesk\CleeDesk.csproj", "{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clee.CLI", "Clee.CLI\Clee.CLI.csproj", "{EDF6997D-A36F-4DEF-A6DC-3950F93E4076}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FA49DA4-D793-434E-84EF-AE3D0CA6862D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDF6997D-A36F-4DEF-A6DC-3950F93E4076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDF6997D-A36F-4DEF-A6DC-3950F93E4076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDF6997D-A36F-4DEF-A6DC-3950F93E4076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDF6997D-A36F-4DEF-A6DC-3950F93E4076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
