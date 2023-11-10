@@ -61,6 +61,7 @@ fn main()
 fn print(var)
 {-
     echo %var%
+    ./return("hi")
 -}
 """.Trim() : File.ReadAllText(_path);
         }

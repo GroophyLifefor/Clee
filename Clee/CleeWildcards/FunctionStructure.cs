@@ -29,9 +29,10 @@ public class FunctionStructure : BaseWildcard
         
         __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
 
-        var labelParameters = GenerateLabelParameters(args);
-        var defineParameters = GenerateDefineParameters(args);
-        var disposeParameters = GenerateDisposeParameters(args);
+        var isSaveAsCustomized = args.Count(x => x.DisplayName == "saveAs") > 0;
+        var labelParameters = GenerateLabelParameters(args, isSaveAsCustomized);
+        var defineParameters = GenerateDefineParameters(args, isSaveAsCustomized: isSaveAsCustomized);
+        var disposeParameters = GenerateDisposeParameters(args, isSaveAsCustomized);
         
         modifyWildcard.Replace(
             $":{name} {AddIfNotEndWith(labelParameters, Environment.NewLine)}" +
@@ -79,25 +80,28 @@ public class FunctionStructure : BaseWildcard
         }).ToList();
     }
 
-    private static string GenerateLabelParameters(List<Parameter> args)
+    private static string GenerateLabelParameters(List<Parameter> args, bool isSaveAsCustomized )
         => args.Count == 0 
             ? "" 
             : string.Join(
                     string.Empty, 
                     args.Select(x => $"<{x.DisplayName}> ")
-                    ).Trim();
+                    ).Trim() +
+              (isSaveAsCustomized ? "" : $" <saveAs [If Needed]>");
 
-    private static string GenerateDefineParameters(List<Parameter> args, int i = 1)
+    private static string GenerateDefineParameters(List<Parameter> args, int i = 1, bool isSaveAsCustomized = false)
         => string.Join(
             string.Empty, 
             args.Select(x => $"set {x.DefineName}=%~{i++}\r\n")
-            );
-    
-    private string GenerateDisposeParameters(List<Parameter> args)
+            ) + 
+           (isSaveAsCustomized ? "" : $"set saveAs=%~{i++}\r\n");
+
+    private string GenerateDisposeParameters(List<Parameter> args, bool isSaveAsCustomized)
         => string.Join(
-            string.Empty, 
-            args.Select(x => $"set {x.DefineName}=\r\n")
-            );
+               string.Empty,
+               args.Select(x => $"set {x.DefineName}=\r\n")
+           ) +
+           (isSaveAsCustomized ? "" : $"set saveAs=\r\n");
 }
 
 internal class Parameter
