@@ -22,6 +22,7 @@ public class CodeGeneratorInstance
         
         _wildcardManager.AddWildcard("Initializer", new Initializer(), 1);
         _wildcardManager.AddWildcard("Debugger", new Debugger(), 1);
+        _wildcardManager.AddWildcard("ReturnInFunction", new ReturnInFunction(), 1);
 
         _wildcardManager.AddWildcard("MultipleLineComment", new MultipleLineComment(), 2);
         _wildcardManager.AddWildcard("SingleLineComment", new SingleLineComment(), 2);

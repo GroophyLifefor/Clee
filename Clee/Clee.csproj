@@ -66,6 +66,7 @@
     <Compile Include="CleeWildcards\Initializer.cs" />
     <Compile Include="CleeWildcards\InvokingFunction.cs" />
     <Compile Include="CleeWildcards\OperatorSupport.cs" />
+    <Compile Include="CleeWildcards\ReturnInFunction.cs" />
     <Compile Include="CleeWildcards\SubFunctionInvoking.cs" />
     <Compile Include="CleeWildcards\__external.cs" />
     <Compile Include="CodeGeneratorInstance.cs" />
