@@ -62,12 +62,16 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Build\Base.cs" />
-        <Compile Include="CommandLineOptions.cs" />
+        <Compile Include="Build\BuildOptions.cs" />
         <Compile Include="New\Base.cs" />
+        <Compile Include="New\NewOptions.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="ProjectSettings.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Resource\CleeHelloWorld.cs" />
+        <Compile Include="Resource\Help\BuildHelp.cs" />
+        <Compile Include="Resource\Help\HelpMenu.cs" />
+        <Compile Include="Resource\Help\NewHelp.cs" />
         <Compile Include="Resource\ProjectSettingsXML.cs" />
     </ItemGroup>
     <ItemGroup>
