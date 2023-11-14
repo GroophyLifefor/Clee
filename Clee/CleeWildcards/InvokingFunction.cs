@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Clee.Text;
 using StringManager = Clee.Text.StringManager;
 

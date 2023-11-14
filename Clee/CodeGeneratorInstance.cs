@@ -56,6 +56,20 @@ public class CodeGeneratorInstance
         return stringManager.Text.Trim();
     }
     
+    public string Transpile(string path, string cleeCode, out double ms)
+    {
+        var logText = $"- Transpiling. {DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss:fffffff")}";
+        var stopwatch = System.Diagnostics.Stopwatch.StartNew();
+        InvokeLogEvent($"{new string('-', logText.Length)}\r\n{logText}");
+
+        LastestFilePath = path;
+        cleeCode = cleeCode.Replace("\r\n", "ͳ").Replace("\n", "\r\n").Replace("ͳ", "\r\n");
+        var stringManager = _wildcardManager.ApplyWildcards(this, new StringManager(cleeCode));
+        ms = stopwatch.Elapsed.TotalMilliseconds;
+        InvokeLogEvent($"- Transpile end within {ms}ms.\r\n{new string('-', logText.Length)}");
+        return stringManager.Text.Trim();
+    }
+    
     public string TranspileWithGettingSpecificFunctions(string path, string cleeCode, string[] functionNames)
     {
         var logText = $"- Transpiling. {DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss:fffffff")}";
