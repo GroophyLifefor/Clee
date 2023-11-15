@@ -1,5 +1,4 @@
-﻿using System;
-using Clee.Text;
+﻿using Clee.Text;
 
 namespace Clee.CleeWildcards;
 

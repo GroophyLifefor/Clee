@@ -1,12 +1,11 @@
-﻿using System.Linq;
+using System.Linq;
 using Clee.Text;
-using StringManager = Clee.Text.StringManager;
 
-namespace Clee.CleeWildcards;
+namespace Clee.CleeWildcards.Define;
 
-public class InvokingFunction : BaseWildcard
+public class DefineWithInvoking : BaseWildcard
 {
-    public override string WildcardString { get; } = "./[functionName]([args])";
+    public override string WildcardString { get; } = "define[name]=*./[functionName]([args])";
     public override bool CaseSensitive { get; } = false;
     public override __External __External { get; set; }
     
@@ -16,11 +15,18 @@ public class InvokingFunction : BaseWildcard
 
     public override void OnProcess(StringManager stringManager, ModifyWildcard modifyWildcard)
     {
+        if (modifyWildcard.WildcardIndexes[0].Value.Contains('\n') || modifyWildcard.WildcardIndexes[1].Value.Contains('\n'))
+        {
+            modifyWildcard.RevertWithIncreaseIndex(1);
+            return;
+        };
+
+        string saveAs = '\"' + modifyWildcard.GetValue("name").Trim().Trim('"') + '\"'; 
         string functionName = modifyWildcard.GetValue("functionName");
         string[] args = modifyWildcard.GetValue("args").Split(',').Select(x => x.Trim()).ToArray();
-        
+
         __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
 
-        modifyWildcard.Replace($"CALL :{functionName} {string.Join(" ", args)}");
+        modifyWildcard.Replace($"CALL :{functionName} {string.Join(" ", args)} {saveAs}");
     }
 }

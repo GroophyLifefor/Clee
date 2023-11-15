@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Clee.Text;
 
 namespace Clee.CleeWildcards;
 
-public class SetWithInvoking : BaseWildcard
+public class DefineWithInvokingWithSemicolon : BaseWildcard
 {
     public override string WildcardString { get; } = ";[name]=*./[functionName]([args])";
     public override bool CaseSensitive { get; } = false;

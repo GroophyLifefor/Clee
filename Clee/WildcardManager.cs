@@ -9,7 +9,7 @@ public class WildcardManager
 {
     private List<ManagedWildcard> _wildcards { get; } = new();
 
-    public void addWildcard(string wildcardName, BaseWildcard baseWildcard, int deepLevel)
+    public void AddWildcard(string wildcardName, BaseWildcard baseWildcard, int deepLevel)
     {
         var wildcardString = baseWildcard.WildcardString;
         var wildcard = StringManager.ExportWildcards(wildcardString);
