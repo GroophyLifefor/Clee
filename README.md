@@ -1,6 +1,6 @@
 # What is Clee?
 
-Clee was a batchfile transpiler, which means that it can be used to convert Clee code into Windows batch script code. Clee has functions and an import system.
+Clee was a batch-file transpiler, which means that it can be used to convert Clee code into Windows batch script code. Clee has functions and an import system.
 
 ## Features of Clee
 
@@ -46,6 +46,11 @@ if you don't have msbuild, [Download here](http://www.microsoft.com/en-us/downlo
 │   │   └───Release <-- Clee transpiler codes
 │   ├───obj
 │   │   └───Release
+├───Clee.CLI
+│   ├───bin
+│   │   └───Release <-- Clee.CLI demo application
+│   ├───obj
+│   │   └───Release
 ├───CleeDesk
 │   ├───bin
 │   │   └───Release <-- CleeDesk demo application
@@ -55,7 +60,7 @@ if you don't have msbuild, [Download here](http://www.microsoft.com/en-us/downlo
 
 ## Documentation
 
-Soon
+https://github.com/GroophyLifefor/Clee/wiki
 
 ## Feedback
 Bugs should be reported at https://github.com/GroophyLifefor/Clee/issues. 
