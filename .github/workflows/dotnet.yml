@@ -1,0 +1,39 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Setup .NET Core SDK 4.8
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 4.8.x
+      
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build project
+      run: dotnet build --configuration Release
+      
+    - name: Publish bin/release output
+      run: |
+        mkdir -p release
+        cp -r Clee.CLI/bin/Release/* release/
+        zip -r release.zip release
+        
+    # Here for might want to add steps for tests, additional checks, or deployments
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: release-zip
+        path: release.zip
