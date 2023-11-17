@@ -71,6 +71,6 @@ soon
 
 ## The Author
 
-Clee was originally designed and developed by Murat Kirazkaya (Groophy) in 23.7.2023.
+Clee was originally designed and developed by Murat Kirazkaya(Groophy) in 23.7.2023.
 
 <groophylifefor@gmail.com>
