@@ -52,6 +52,13 @@ public class Base
             .Start("Building...", _ => 
             {
                 CodeGeneratorInstance codeGenerator = new CodeGeneratorInstance();
+                
+                // --logs option
+                if (options.Logs ?? false)
+                {
+                    codeGenerator.OnLog += Console.WriteLine;
+                }
+                
                 var transpiledCode =
                     codeGenerator.Transpile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
                         File.ReadAllText(projectSettings.EntryFile),
@@ -83,6 +90,10 @@ public class Base
                 case "-h":
                 case "--help":
                     options.Help = true;
+                    break;
+                case "-l":
+                case "--logs":
+                    options.Logs = true;
                     break;
                 default:
                     if (options.Path is null)

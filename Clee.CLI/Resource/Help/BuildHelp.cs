@@ -10,5 +10,7 @@ Usage:
 Arguments:
   <PROJECT | SOLUTION>  The project or solution file to operate on. If a file is not specified, the command will search 
                         the current directory for one.
+  -h --help             Help menu.
+  -l --logs             Print logs to terminal.
 """;
 }
