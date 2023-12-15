@@ -17,34 +17,51 @@ public class ImportModule : BaseWildcard
     public override void OnProcess(StringManager stringManager, ModifyWildcard modifyWildcard)
     {
         var args = modifyWildcard.GetValue("args").Split(new[]{","}, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+        
         string rawPath = args.Last().Trim('"');
-        string path;
-        if (TryGetFilePath(rawPath, out path))
+
+        TryImportFunction(rawPath, args, __External, (isFound, code) =>
+        {
+            if (isFound)
+            {
+                __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
+
+                modifyWildcard.Replace(string.Empty);
+                stringManager.Replace(stringManager.MaxLength, 0, code + "\r\n");
+            }
+            else
+            {
+                __External.InvokeLogEvent($"file not found - {AddExtensionIfNeeded(Path.Combine(__External.LastestFilePath, Path.GetFileName(rawPath)), ".clee")}");
+                
+                modifyWildcard.Replace(string.Empty);
+            }
+        });
+    }
+
+    public static void TryImportFunction(string rawPath, string[] functionNames, __External external, Action<bool/* isFound */, string?/* code */> action)
+    {
+        if (TryGetFilePath(rawPath, out var path, external))
         {
             var codeGeneratorInstance = new CodeGeneratorInstance();
-            var allowedFuncs = new string[args.Length - 1];
-            Array.Copy(args, allowedFuncs, allowedFuncs.Length);
+            var allowedFunctionNames = new string[functionNames.Length - 1];
+            Array.Copy(functionNames, allowedFunctionNames, allowedFunctionNames.Length);
             var code = codeGeneratorInstance.TranspileWithGettingSpecificFunctions(
-                Path.GetDirectoryName(path), 
+                Path.GetDirectoryName(path) ?? string.Empty, 
                 File.ReadAllText(path).Replace("#Clee:Library", $"REM Clee:Library:{Path.GetFileName(path)}"),
-                allowedFuncs);
-            
-            __External.InvokeLogEvent($"new {this.ToString().Split('.').Last()} as \r\n```clee\r\n{modifyWildcard.Text}\r\n```\r\n");
+                allowedFunctionNames);
 
-            modifyWildcard.Replace(string.Empty);
-            stringManager.Replace(stringManager.MaxLength, 0, code + "\r\n");
+            action.Invoke(true, code);
         }
         else
         {
-            modifyWildcard.Replace(string.Empty);
-            __External.InvokeLogEvent($"file not found - {AddExtensionIfNeeded(Path.Combine(__External.LastestFilePath, Path.GetFileName(rawPath)), ".clee")}");
+            action.Invoke(false, null);
         }
     }
 
-    private bool TryGetFilePath(string path, out string match)
+    private static bool TryGetFilePath(string path, out string match, __External external)
     {
         path = path.Replace('/', '\\');
-        var baseFilePath = AddExtensionIfNeeded(Path.Combine(__External.LastestFilePath, path), ".clee");
+        var baseFilePath = AddExtensionIfNeeded(Path.Combine(external.LastestFilePath, path), ".clee");
         var assemblyPath = Path.GetDirectoryName(baseFilePath);
         var assemblyCase = Path.Combine(assemblyPath, path);
         

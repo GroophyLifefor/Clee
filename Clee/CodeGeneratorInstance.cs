@@ -34,7 +34,8 @@ public class CodeGeneratorInstance
 
         _wildcardManager.AddWildcard("invokingFunction", new InvokingFunction(), 4);
         
-        _wildcardManager.AddWildcard("defineVariable", new DefineVariable(), 5);
+        // Broke the possible code
+        // _wildcardManager.AddWildcard("defineVariable", new DefineVariable(), 5);
         
         _wildcardManager.AddWildcard("DefineVariableWithSemiColon", new DefineVariableWithSemicolon(), 6);
         _wildcardManager.AddWildcard("OperatorSupport", new OperatorSupport(), 6);
