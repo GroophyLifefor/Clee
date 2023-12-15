@@ -47,7 +47,11 @@ public class FunctionStructure : BaseWildcard
     private bool IsAllowedFunction(string fname)
     {
         if (__External.AllowedFunctionNames.Length == 0) return true;
-        
+
+        if (__External.AllowedFunctionNames.Length == 1
+            && __External.AllowedFunctionNames.First().Equals("*"))
+            return true;
+            
         foreach (var t in __External.AllowedFunctionNames)
         {
             if (t.Equals(fname, StringComparison.InvariantCultureIgnoreCase))
