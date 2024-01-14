@@ -24,7 +24,7 @@ public class DefineVariableWithSemicolon : BaseWildcard
         modifyWildcard.Replace($"SET {(isArithmetic ? "/A" : "")} {name}={value}\r\n");
     }
 
-    static string[] ArithmeticKeys = new[] { "*", "/", "%", "+", "-", "<<", ">>", "^", "*=", "/=", "%=", "+=", "-=", "&=", "^=", "|=", "<<=", ">>=" };
+    static string[] ArithmeticKeys = new[] { "*", "/", "+", "-", "<<", ">>", "^", "*=", "/=", "%=", "+=", "-=", "&=", "^=", "|=", "<<=", ">>=" };
     private static bool IsArithmetic(string value)
         => ArithmeticKeys.Any(key => value.Contains(key));
 }

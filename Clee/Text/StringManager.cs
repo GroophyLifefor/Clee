@@ -191,6 +191,14 @@ public class StringManager : IDisposable
         return patternList.ToArray();
     }
 
+    public void ApplyWildcards(
+        string wildcardsAsString,
+        Action<ModifyWildcard> _delegate,
+        bool caseSensitive = false,
+        string wildcardName = ""
+        )
+        => ApplyWildcards(StringManager.ExportWildcards(wildcardsAsString), _delegate, caseSensitive, wildcardName);
+
     /// <summary>
     /// Applies the provided wildcards to the managed text using the given delegate for modification or replacement.
     /// </summary>

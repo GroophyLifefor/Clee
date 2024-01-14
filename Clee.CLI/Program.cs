@@ -1,4 +1,5 @@
 using System;
+using Clee.Text;
 using Spectre.Console;
 
 namespace Clee.CLI;

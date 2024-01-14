@@ -26,7 +26,7 @@ public class Base
 
         if (files.Length < 1)
         {
-            AnsiConsole.Markup("[red]ERR[/] cleeproj file not found.");
+            AnsiConsole.Markup("[red]ERR[/] cleeproj file not found.\r\n[yellow]INFO[/] Path: " + path);
             beforeClose();
             return;
         }
@@ -60,8 +60,9 @@ public class Base
                 }
                 
                 var transpiledCode =
-                    codeGenerator.Transpile(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),
-                        File.ReadAllText(projectSettings.EntryFile),
+                    codeGenerator.Transpile(
+                        path,
+                        File.ReadAllText(Path.Combine(path, projectSettings.EntryFile)),
                         out ms);
 
                 SafeCreateFile("bin/main.bat", transpiledCode);
@@ -94,6 +95,18 @@ public class Base
                 case "-l":
                 case "--logs":
                     options.Logs = true;
+                    break;
+                case "-p":
+                case "--path":
+                    if (args.Length > i+1)
+                    {
+                        i++;
+                        options.Path = args[i];
+                    }
+                    else
+                    {
+                        AnsiConsole.WriteException(new ArgumentNullException(nameof(options.Path)));
+                    }
                     break;
                 default:
                     if (options.Path is null)

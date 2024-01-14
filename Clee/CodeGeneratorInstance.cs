@@ -2,7 +2,6 @@
 using System;
 using Clee.CleeWildcards;
 using Clee.CleeWildcards.Comments;
-using Clee.CleeWildcards.Define;
 using Clee.Text;
 
 namespace Clee;
@@ -17,8 +16,8 @@ public class CodeGeneratorInstance
     public CodeGeneratorInstance()
     {
         _wildcardManager = new WildcardManager(); // -1 :D
-        
-        _wildcardManager.AddWildcard("functionStructure", new FunctionStructure(), 0);
+
+        _wildcardManager.AddWildcard("FunctionStructure", new FunctionStructure(), 0);
         
         _wildcardManager.AddWildcard("Initializer", new Initializer(), 1);
         _wildcardManager.AddWildcard("Debugger", new Debugger(), 1);
@@ -26,19 +25,15 @@ public class CodeGeneratorInstance
 
         _wildcardManager.AddWildcard("MultipleLineComment", new MultipleLineComment(), 2);
         _wildcardManager.AddWildcard("SingleLineComment", new SingleLineComment(), 2);
-        _wildcardManager.AddWildcard("DefineWithInvoking", new DefineWithInvoking(), 2);
 
         _wildcardManager.AddWildcard("ImportModule", new ImportModule(), 3);
         _wildcardManager.AddWildcard("DefineWithInvokingWithSemicolon", new DefineWithInvokingWithSemicolon(), 3);
         _wildcardManager.AddWildcard("SubFunctionInvoking", new SubFunctionInvoking(), 3);
 
-        _wildcardManager.AddWildcard("invokingFunction", new InvokingFunction(), 4);
+        _wildcardManager.AddWildcard("InvokingFunction", new InvokingFunction(), 4);
         
-        // Broke the possible code
-        // _wildcardManager.AddWildcard("defineVariable", new DefineVariable(), 5);
-        
-        _wildcardManager.AddWildcard("DefineVariableWithSemiColon", new DefineVariableWithSemicolon(), 6);
-        _wildcardManager.AddWildcard("OperatorSupport", new OperatorSupport(), 6);
+        _wildcardManager.AddWildcard("DefineVariableWithSemiColon", new DefineVariableWithSemicolon(), 5);
+        _wildcardManager.AddWildcard("OperatorSupport", new OperatorSupport(), 5);
     }
     
     internal void InvokeLogEvent(string log)
@@ -81,6 +76,4 @@ public class CodeGeneratorInstance
         var stringManager = _wildcardManager.ApplyWildcards(this, new StringManager(cleeCode), functionNames);
         return string.Join("\r\n", stringManager.Text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)).Trim();
     }
-    
-    
 }
