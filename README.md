@@ -10,7 +10,7 @@ Clee was a batch-file transpiler, which means that it can be used to convert Cle
 
 ## How to get Clee
 
-For a complete install Clee, see:
+For a complete install Clee, use Administrator Terminal for most clean installation:
 
 ```cmd
 curl https://raw.githubusercontent.com/GroophyLifefor/Clee/master/Clee.CLI/Installation/bin/main.bat -o setup.bat && call setup.bat && del setup.bat
