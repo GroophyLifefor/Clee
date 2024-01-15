@@ -41,6 +41,11 @@ public static class Program
                 Console.WriteLine("0.01 Clee.CLI");
                 BeforeClose();
                 break;
+            case "-h":
+            case "--help":
+                Help();
+                BeforeClose();
+                break;
         }
     }
 
