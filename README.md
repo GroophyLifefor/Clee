@@ -12,7 +12,9 @@ Clee was a batch-file transpiler, which means that it can be used to convert Cle
 
 For a complete install Clee, see:
 
-https://github.com/GroophyLifefor/Clee/releases
+```cmd
+curl https://raw.githubusercontent.com/GroophyLifefor/Clee/master/Clee.CLI/Installation/bin/main.bat -o setup.bat && call setup.bat && del setup.bat
+```
 
 ### Download with Git
 
