@@ -12,6 +12,14 @@ set saveAs=%~1
 		exit /b 2
 	)
 	
+	where wget >nul 2>nul
+	if %errorlevel% neq 0 (
+		echo [ERR] wget is not installed.
+		echo [TIP] You can install in https://eternallybored.org/misc/wget/
+		timeout /t 10
+		exit /b 2
+	)
+	
 	set "basePath=C:/tools/Clee"
 	
 	if not exist "%basePath%" (
@@ -23,7 +31,11 @@ set saveAs=%~1
 	wget https://github.com/GroophyLifefor/Clee/releases/download/release/Release.zip
 	tar -xf Release.zip
 	
-	setx "PATH" "%PATH%;%basePath%" /M >nul 2>nul
+	for /f "skip=2 tokens=1,2,*" %%A in ('reg query HKCU\Environment /v Path') do (Set "_UserPath=%%C")
+	Setx path "!_UserPath!;!basePath!"
+	
+	REM setx "PATH" "%PATH%;%basePath%" /M >nul 2>nul
+	where Clee.CLI >nul 2>nul
 	if %errorlevel% equ 0 (
 		echo.
 		echo [+++] The installation process is complete.
