@@ -24,9 +24,6 @@ set saveAs=%~1
 	tar -xf Release.zip
 	del Release.zip
 	
-	echo DONE
-	exit /b 0
-	
 	setx "PATH" "%PATH%SET /A %basePath%/Clee.CLI/bin/Release" /M >nul 2>nul
 	if %errorlevel% equ 0 (
 		echo.
