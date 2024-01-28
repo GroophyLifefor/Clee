@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Clee.Text;
 
 namespace Clee.CleeWildcards;
@@ -16,6 +17,9 @@ public class DefineVariableWithSemicolon : BaseWildcard
     public override void OnProcess(StringManager stringManager, ModifyWildcard modifyWildcard)
     {
         var name = modifyWildcard.GetValue("name").Trim();
+        
+        if (name.Contains(' ')) return;
+        
         var value = modifyWildcard.GetValue("value").Trim();
         var isArithmetic = IsArithmetic(modifyWildcard.Text);
 
