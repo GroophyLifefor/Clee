@@ -20,6 +20,13 @@ set saveAs=%~1
 		exit /b 2
 	)
 	
+	where msbuild >nul 2>nul
+	if %errorlevel% neq 0 (
+		echo [ERR] msbuild is not installed
+		timeout /t 10
+		exit /b 2
+	)
+	
 	set "basePath=C:/tools/Clee"
 	
 	if not exist "%basePath%" (
@@ -29,6 +36,9 @@ set saveAs=%~1
 	git clone "https://github.com/GroophyLifefor/Clee.git" "%basePath%/"
 	
 	dotnet build -c Release "%basePath%/Clee.CLI/Clee.CLI.csproj"
+	
+	cd Clee.CLI
+	msbuild
 	
 	setx "PATH" "%PATH%SET /A %basePath%/Clee.CLI/bin/Release" /M >nul 2>nul
 	if %errorlevel% equ 0 (

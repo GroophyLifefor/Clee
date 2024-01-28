@@ -38,7 +38,7 @@ public class ImportModule : BaseWildcard
         });
     }
 
-    public static void TryImportFunction(string rawPath, string[] functionNames, __External external, Action<bool/* isFound */, string?/* code */> action)
+    private static void TryImportFunction(string rawPath, string[] functionNames, __External external, Action<bool/* isFound */, string?/* code */> action)
     {
         if (TryGetFilePath(rawPath, out var path, external))
         {
