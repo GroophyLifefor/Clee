@@ -3,25 +3,10 @@
 fn main()
 {-
 	REM Good code does not need comments
-	where git >nul 2>nul
+	where tar >nul 2>nul
 	if %errorlevel% neq 0 (
-		echo [ERR] Git is not installed
-		echo [TIP] Try install in https://git-scm.com/downloads
-		timeout /t 10
-		exit /b 1
-	)
-	
-	where dotnet >nul 2>nul
-	if %errorlevel% neq 0 (
-		echo [ERR] Dotnet is not installed
-		echo [TIP] Try install in https://dotnet.microsoft.com/en-us/download
-		timeout /t 10
-		exit /b 2
-	)
-	
-	where msbuild >nul 2>nul
-	if %errorlevel% neq 0 (
-		echo [ERR] msbuild is not installed
+		echo [ERR] tar is not installed.
+		echo [TIP] You can install in https://gnuwin32.sourceforge.net/packages/gtar.htm
 		timeout /t 10
 		exit /b 2
 	)
@@ -32,12 +17,14 @@ fn main()
 		mkdir "%basePath%"
 	)
 	
-	git clone "https://github.com/GroophyLifefor/Clee.git" "%basePath%/"
+	cd %basePath%
 	
-	dotnet build -c Release "%basePath%/Clee.CLI/Clee.CLI.csproj"
+	wget https://github.com/GroophyLifefor/Clee/releases/download/release/Release.zip
+	tar -xf Release.zip
+	del Release.zip
 	
-	cd Clee.CLI
-	msbuild
+	echo DONE
+	exit /b 0
 	
 	setx "PATH" "%PATH%;%basePath%/Clee.CLI/bin/Release" /M >nul 2>nul
 	if %errorlevel% equ 0 (
