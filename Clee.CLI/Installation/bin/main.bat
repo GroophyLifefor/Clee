@@ -22,7 +22,6 @@ set saveAs=%~1
 	
 	wget https://github.com/GroophyLifefor/Clee/releases/download/release/Release.zip
 	tar -xf Release.zip
-	del Release.zip
 	
 	setx "PATH" "%PATH%;%basePath%" /M >nul 2>nul
 	if %errorlevel% equ 0 (
@@ -37,7 +36,7 @@ set saveAs=%~1
 		echo [TIP] Try add to path from "Edit the system environment varriables"
 		echo [TIP] You can try with "Clee.CLI --help"
 		echo.
-		echo path: %basePath%/Clee.CLI/bin/Release
+		echo path: %basePath%
 	)
 	pause
 set saveAs=
