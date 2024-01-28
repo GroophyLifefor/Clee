@@ -24,7 +24,7 @@ set saveAs=%~1
 	tar -xf Release.zip
 	del Release.zip
 	
-	setx "PATH" "%PATH%;%basePath%/Clee.CLI/bin/Release" /M >nul 2>nul
+	setx "PATH" "%PATH%;%basePath%" /M >nul 2>nul
 	if %errorlevel% equ 0 (
 		echo.
 		echo [+++] The installation process is complete.
