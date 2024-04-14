@@ -40,6 +40,9 @@ jobs:
         id: commit_sha
         run: echo "${GITHUB_SHA}" # Get the commit SHA of the latest push
 
+      - name: Debug Tag Name
+        run: echo "tag Name: ${{ github.sha }}" # Debug tag name
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
