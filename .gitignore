@@ -20,6 +20,9 @@
 mono_crash.*
 
 # Build results
+Clee.CLI/bin/*
+
+# Build results
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -30,7 +33,7 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+[Bb]in/Release
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
