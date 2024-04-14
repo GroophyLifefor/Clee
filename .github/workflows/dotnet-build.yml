@@ -48,9 +48,6 @@ jobs:
         with:
           tag_name: ${GITHUB_SHA} # Use commit SHA as tag name
           release_name: Release ${{ steps.commit_sha.outputs.stdout }}
-          body: |
-            Changes in this Release
-            - First Change
-            - Second Change
+          body: "commit url: https://github.com/${{ github.repository }}/commit/${{ steps.commit_sha.outputs.stdout }}"
           draft: false
           prerelease: false
