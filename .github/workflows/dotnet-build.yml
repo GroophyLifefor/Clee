@@ -46,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${GITHUB_SHA} # Use commit SHA as tag name
+          tag_name: ${{ GITHUB_SHA }} # Use commit SHA as tag name
           release_name: Release ${{ steps.commit_sha.outputs.stdout }}
           body: "commit url: https://github.com/${{ github.repository }}/commit/${{ steps.commit_sha.outputs.stdout }}"
           draft: false
