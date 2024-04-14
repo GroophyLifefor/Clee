@@ -33,7 +33,8 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/Release
+[Bb]in/*
+![Bb]in/Release/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
