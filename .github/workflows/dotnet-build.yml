@@ -30,11 +30,15 @@ jobs:
   release:
     name: Create Release
     needs: build
-    if: success()
+    if: github.ref == 'refs/heads/main' # Only trigger for pushes to the main branch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Get Commit SHA
+        id: commit_sha
+        run: echo "${GITHUB_SHA}" # Get the commit SHA of the latest push
 
       - name: Create Release
         id: create_release
@@ -42,8 +46,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.commit_sha.outputs.stdout }} # Use commit SHA as tag name
+          release_name: Release ${{ steps.commit_sha.outputs.stdout }}
           body: |
             Changes in this Release
             - First Change
